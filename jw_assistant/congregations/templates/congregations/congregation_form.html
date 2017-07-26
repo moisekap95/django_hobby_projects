@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap %}
+
+{% block block_title %} Sign Up {% endblock %}
+
+{% block body_block %}
+
+  <!-- Contact Section -->
+  <section id="contact">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+
+                <h3 class="form-signin-heading">
+                  {% if not form.instance.pk %}
+                  Create Congregation
+                  {% else %}
+                  Update Congregation
+                  {% endif %}
+                </h3>
+                <hr class="star-primary">
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-8 col-lg-offset-2">
+                  <form method="POST" class="form-signin">
+
+                      {% csrf_token %}
+                      {% if errors %}
+                        <div class = "alert alert-danger alert-dismissable">
+                            {% for error in errors %}
+                            <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                      {% endif %}
+
+                      {{ form | bootstrap }}
+
+                      <input type="submit" name="" value="Submit" class="btn btn-lg btn-success btn-block">
+
+                  </form>
+              </div>
+          </div>
+      </div>
+
+  </section>
+
+{% endblock %}

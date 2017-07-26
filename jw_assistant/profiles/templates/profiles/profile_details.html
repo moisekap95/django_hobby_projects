@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+<!-- form Section -->
+    <section style="background-color:#f5f5f5;">
+        <div class="container">
+            <div class="row" id="profileDetails">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="text-center">
+                      <h3>{{user.username}} Details</h3>
+                      <hr class="star-primary">
+                  </div>
+
+                  {% if profile_details.profile_pic %}
+                    <div class="profil_pic">
+                        <img src="/media/{{profile_details.profile_pic}}"
+                        class="img-responsive img-square" alt="{{user.username}}'s profile picture">
+                    </div>
+                  {% else %}
+                    <div class="profil_pic">
+                        <img src="/media/profile_pics/default-picture.png"
+                        class="img-responsive img-square" alt="{{user.username}}'s profile picture">
+                    </div>
+                  {% endif %}
+                    <p><strong>Username:</strong> {{user.username}}</p>
+                    <p><strong>Email:</strong> {{user.email}}</p>
+                    <p><strong>Phone:</strong> {{profile_details.phone}}</p>
+                    <p><strong>Congregation:</strong> {{profile_details.congregation}}</p>
+                    <p><strong>Street Address:</strong> {{profile_details.street}}</p>
+                    <p><strong>City:</strong> {{profile_details.city}}</p>
+                    <p><strong>Zip Code:</strong> {{profile_details.zip_code}}</p>
+                    <p><strong>State:</strong> {{profile_details.state}}</p>
+                    <p><strong>Country:</strong> {{profile_details.country}}</p>
+                    <div id="congregation-btns">
+                        <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn-lg btn-warning"
+                        href="{% url 'profiles:update' pk=user.pk %}">Update</a>
+                        <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn-lg btn-danger"
+                        href="{% url 'profiles:confirm_delete' pk=user.pk %}">Delete</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+<!-- form Section -->
+    <section style="background-color:#f5f5f5;">
+        <div class="container">
+            <div class="row" id="congDetails">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <div class="text-center">
+                      <h3>{{congregation_details.name}} Details</h3>
+                      <hr class="star-primary">
+                  </div>
+                    <p><strong>Name:</strong> {{congregation_details.name}}</p>
+                    <p><strong>Street Address:</strong> {{congregation_details.street}}</p>
+                    <p><strong>City:</strong> {{congregation_details.city}}</p>
+                    <p><strong>Zip Code:</strong> {{congregation_details.zip_code}}</p>
+                    <p><strong>State:</strong> {{congregation_details.state}}</p>
+                    <p><strong>Country:</strong> {{congregation_details.country}}</p>
+                    <p><strong>Phone:</strong> {{congregation_details.phone}}</p>
+                    <p><strong>Email:</strong> {{congregation_details.email}}</p>
+                    <p><strong>Circuit Overseer:</strong> {{congregation_details.circuit_overseer}}</p>
+                    <p><strong>Circuit:</strong> {{congregation_details.circuit}}</p>
+                    <p><strong>Language:</strong> {{congregation_details.language}}</p>
+                    <p><strong>Added By:</strong> {{congregation_details.added_by}}</p>
+                    {% if user.is_superuser or user.username == congregation_details.added_by %}
+                        <div id="congregation-btns">
+                            <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn-lg btn-warning"
+                            href="{% url 'congregations:update' pk=congregation_details.pk %}">Update</a>
+                            <a class="col-lg-6 col-md-6 col-sm-6 col-xs-12 btn-lg btn-danger"
+                            href="{% url 'congregations:delete' pk=congregation_details.pk %}">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

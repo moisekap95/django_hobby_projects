@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h3>Congregations Search</h3>
+                    <hr class="star-primary">
+                    <button type="button" onclick="previousPage()" class="btn btn-lg btn-info" style="margin:30px;">
+                      Go back to search
+                    </button>
+                    <p style="margin-bottom:15px;">Search Result:</p>
+                </div>
+            </div>
+              <div class="row" style="max-width:970px;margin:auto">
+                  {% if congregations %}
+                      {% for congregation in congregations %}
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+                                <div class="congQuickInfo">
+                                    <p class="col-lg-2 col-md-2 col-sm-2 col-xs-12" style="margin-top:5px;">
+                                      <strong>
+                                        <a href="congregations/{{congregation.id}}/">{{congregation.name}}</a>
+                                      </strong>
+                                    </p>
+                                    <p class="col-lg-2 col-md-2 col-sm-2 col-xs-12">{{congregation.city}}</p>
+                                    <p class="col-lg-2 col-md-2 col-sm-2 col-xs-12">{{congregation.state}}</p>
+                                    <p class="col-lg-2 col-md-2 col-sm-2 col-xs-12">{{congregation.country}}</p>
+                                </div>
+                                <div class="" id="congregation-btns">
+                                  <a href="{% url 'congregations:detail' pk=congregation.pk %}"
+                                  class="col-lg-2 col-md-2 col-sm-2 col-xs-12 btn-lg btn-success">Details</a>
+                                  <a href="{% url 'congregations:detail' pk=congregation.pk %}"
+                                  class="col-lg-2 col-md-2 col-sm-2 col-xs-12 btn-lg btn-primary">Access</a>
+                                </div>
+                            </a>
+                        </div>
+                      {% endfor %}
+
+                  {% else %}
+                      <p>No congregation was found.</p>
+                      <p>Please try again with fewer search keys or contact your elders.</p>
+                  {% endif %}
+              </div>
+        </div>
+    </section>
+
+{% endblock %}
